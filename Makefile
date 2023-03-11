@@ -15,5 +15,6 @@ down:
 	@docker-compose down
 
 
+# Starts the application.
 start:
 	@go run main.go
