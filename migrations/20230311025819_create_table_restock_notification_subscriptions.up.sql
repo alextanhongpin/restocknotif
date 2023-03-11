@@ -13,7 +13,8 @@ CREATE TABLE restock_notification_subscriptions (
 	-- Constraints.
 	PRIMARY KEY (id),
 	FOREIGN KEY (product_id) REFERENCES products(id),
-	FOREIGN KEY (user_id) REFERENCES users(id)
+	FOREIGN KEY (user_id) REFERENCES users(id),
+	UNIQUE (product_id, user_id)
 );
 
 
