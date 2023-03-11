@@ -1,4 +1,4 @@
-package productsvc
+package product
 
 import (
 	"context"
