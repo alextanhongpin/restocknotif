@@ -15,4 +15,6 @@ type User struct {
 	Name      string
 	CreatedAt time.Time
 	UpdatedAt time.Time
+
+	Subscriptions []RestockNotificationSubscription `bun:"rel:has-many,join:id=user_id"`
 }

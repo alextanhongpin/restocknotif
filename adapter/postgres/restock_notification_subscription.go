@@ -19,6 +19,6 @@ type RestockNotificationSubscription struct {
 	UpdatedAt time.Time
 
 	// Relations.
-	User    *User    `bun:"rel:belongs-to"`
-	Product *Product `bun:"rel:belongs-to"`
+	User    *User    `bun:"rel:belongs-to,join:user_id=id"`
+	Product *Product `bun:"rel:belongs-to,join:product_id=id"`
 }

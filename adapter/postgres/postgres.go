@@ -9,6 +9,7 @@ import (
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/driver/pgdriver"
+	"github.com/uptrace/bun/extra/bundebug"
 )
 
 // IDB is an alias to bun.IDB.
@@ -26,5 +27,17 @@ func New() *bun.DB {
 
 	db := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
 
-	return bun.NewDB(db, pgdialect.New())
+	bundb := bun.NewDB(db, pgdialect.New())
+	bundb.AddQueryHook(
+		bundebug.NewQueryHook(
+			// disable the hook
+			bundebug.WithEnabled(false),
+
+			// BUNDEBUG=1 logs failed queries
+			// BUNDEBUG=2 logs all queries
+			bundebug.FromEnv("BUNDEBUG"),
+		),
+	)
+
+	return bundb
 }
